@@ -392,7 +392,7 @@
                                     requireallfieldsErr();
                                 }
                                 //requiring the user to have the same password and confirm password input
-                                else if ($password != $confirmpassword) {
+                                else if ($_POST["password"] != $_POST["confirmpassword"]) {
                                     confirmpasswordErr();
                                 }
                                 else {
