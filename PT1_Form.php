@@ -364,38 +364,53 @@
 
                     
                         //functions for errors
+                        //error requiring all fields
                         function requireallfieldsErr() {
                             $requireallfieldsErr = "All fields required!";
                             echo "<script>alert('$requireallfieldsErr');</script>";
                         }
-                        
+                        //error requiring the same password and confirm password
                         function confirmpasswordErr() {
                             $confirmpasswordErr = "Password not matched!";
                             echo "<script>alert('$confirmpasswordErr');</script>";
                         }
 
 
+                        $requiredfields = array('firstname', 'lastname', 'gender', 'dateofbirth', 'address', 'country', 'username', 'password', 'confirmpassword');
+                        $errors = false;
+                        if(isset($_POST['submit']))
+                            {
+                                array_walk($_POST, 'test_input');
 
-
-                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                            if (empty($_POST["username"])) {
-                                $usernameErr = "Username is required...";
-                                echo "<script>alert('$usernameErr');</script>";
-                            }else {
-                                $username = test_input($_POST["username"]);
+                                foreach($requiredfields as $r) {
+                                    if(strlen($_POST[$r]) == 0) {
+                                        $errors = true;
+                                        break;
+                                    }
+                                }
+                                if ($errors ==  true) {
+                                    requireallfieldsErr();
+                                }
                                 
+                                else {
+                                    //save the values that the user inputted from the HTML form to the PHP variables
+                                    $firstname = test_input($_POST["firstname"]);
+                                    $lastname = test_input($_POST["lastname"]);
+                                    $gender = test_input($_POST["gender"]);
+                                    $dateofbirth = test_input($_POST["dateofbirth"]);
+                                    $address = test_input($_POST["address"]);
+                                    $country = test_input($_POST["country"]);
+                                    $username = test_input($_POST["username"]);
+                                    $password = test_input($_POST["password"]);
+                                    
+                                }
                             }
+
                             
-                             if (empty($_POST["password"])) {
-                                $passErr = "Password is required...";
-                                echo  "<script>alert('$passErr');</script>";
-                            }else {
-                                $password = test_input($_POST["password"]);
+                            
+                             
 
-                               
-                            }
-
-                        }
+                        
 
                         function test_input($data){
                             $data = trim($data);
@@ -481,9 +496,20 @@
                         <?php
                         //Display the inputs on the form
                         echo "<h2>Your given values are as:</h2>";
+                        echo $firstname;
+                        echo "<br>";
+                        echo $lastname;
+                        echo "<br>";
+                        echo $gender;
+                        echo "<br>";
+                        echo $dateofbirth;
+                        echo "<br>";
+                        echo $address;
+                        echo "<br>";
+                        echo $country;
+                        echo "<br>";
                         echo $username;
                         echo "<br>";
-
                         echo $password;
                         echo "<br>";
                          ?>
