@@ -375,7 +375,7 @@
                             echo "<script>alert('$confirmpasswordErr');</script>";
                         }
 
-
+                        //argument requiring the user to fill in all fields
                         $requiredfields = array('firstname', 'lastname', 'gender', 'dateofbirth', 'address', 'country', 'username', 'password', 'confirmpassword');
                         $errors = false;
                         if(isset($_POST['submit']))
@@ -391,7 +391,10 @@
                                 if ($errors ==  true) {
                                     requireallfieldsErr();
                                 }
-                                
+                                //requiring the user to have the same password and confirm password input
+                                else if ($password != $confirmpassword) {
+                                    confirmpasswordErr();
+                                }
                                 else {
                                     //save the values that the user inputted from the HTML form to the PHP variables
                                     $firstname = test_input($_POST["firstname"]);
