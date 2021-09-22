@@ -352,10 +352,30 @@
 
                     <?php 
                         //variables set to empty values 
-                        $usernameErr = $passErr = "";
-                        $username = $password = "";
+                        $firstname = "";
+                        $lastname = "";
+                        $gender = "";
+                        $dateofbirth = "";
+                        $address = "";
+                        $country = "";
+                        $username = "";
+                        $password = "";
+                        $confirmpassword = "";
 
+                    
+                        //functions for errors
+                        function requireallfieldsErr() {
+                            $requireallfieldsErr = "All fields required!";
+                            echo "<script>alert('$requireallfieldsErr');</script>";
+                        }
                         
+                        function confirmpasswordErr() {
+                            $confirmpasswordErr = "Password not matched!";
+                            echo "<script>alert('$confirmpasswordErr');</script>";
+                        }
+
+
+
 
                         if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             if (empty($_POST["username"])) {
@@ -384,8 +404,52 @@
                             return $data;
                         }
                     ?>
+                        
+                        <!-- registration form -->
                         <form method = "POST" action ="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                             <table> 
+                            <tr>
+                                    <td><label>First Name: </label></td>
+                                    <td><input type = "text" name = "firstname" id="firstname">
+                                        
+                                    </td>
+                                    </tr>
+                                </tr>
+                                <tr>
+                                    <td><label>Last Name: </label></td>
+                                    <td><input type = "text" name = "lastname" id="lastname">
+                                        
+                                    </td>
+                                    </tr>
+                                </tr>
+                                <tr>
+                                    <td><label>Gender: </label></td>
+                                    <td><input type = "text" name = "gender" id="gender">
+                                        
+                                    </td>
+                                    </tr>
+                                </tr>
+                                <tr>
+                                    <td><label>Date of Birth </label></td>
+                                    <td><input type = "text" name = "dateofbirth" id="dateofbirth">
+                                        
+                                    </td>
+                                    </tr>
+                                </tr>
+                                <tr>
+                                    <td><label>Address: </label></td>
+                                    <td><input type = "text" name = "address" id="address">
+                                        
+                                    </td>
+                                    </tr>
+                                </tr>
+                                <tr>
+                                    <td><label>Country: </label></td>
+                                    <td><input type = "text" name = "country" id="country">
+                                        
+                                    </td>
+                                    </tr>
+                                </tr>
                                 <tr>
                                     <td><label>Username: </label></td>
                                     <td><input type = "text" name = "username" id="username">
@@ -401,6 +465,13 @@
                                     </td>
                                     </tr>
                                 </tr>
+                                <tr>
+                                    <td><label>Confirm Password: </label></td>
+                                    <td><input type = "password" name = "confirmpassword">
+                                        
+                                    </td>
+                                    </tr>
+                                </tr>
                                 <td>
                                     <input type="submit" name = "submit" value = "Submit">
                                 </td>
@@ -408,6 +479,7 @@
                         </form>
 
                         <?php
+                        //Display the inputs on the form
                         echo "<h2>Your given values are as:</h2>";
                         echo $username;
                         echo "<br>";
