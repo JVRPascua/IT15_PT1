@@ -348,7 +348,73 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">LPU Student Record</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Registration Form</h1>
+
+                    <?php 
+                        //variables set to empty values 
+                        $usernameErr = $passErr = "";
+                        $username = $password = "";
+
+                        
+
+                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                            if (empty($_POST["username"])) {
+                                $usernameErr = "Username is required...";
+                                echo "<script>alert('$usernameErr');</script>";
+                            }else {
+                                $username = test_input($_POST["username"]);
+                                
+                            }
+                            
+                             if (empty($_POST["password"])) {
+                                $passErr = "Password is required...";
+                                echo  "<script>alert('$passErr');</script>";
+                            }else {
+                                $password = test_input($_POST["password"]);
+
+                               
+                            }
+
+                        }
+
+                        function test_input($data){
+                            $data = trim($data);
+                            $data = stripslashes($data);
+                            $data = htmlspecialchars($data);
+                            return $data;
+                        }
+                    ?>
+                        <form method = "POST" action ="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                            <table> 
+                                <tr>
+                                    <td><label>Username: </label></td>
+                                    <td><input type = "text" name = "username" id="username">
+                                        
+                                    </td>
+                                    </tr>
+                                </tr>
+
+                                <tr>
+                                    <td><label>Password: </label></td>
+                                    <td><input type = "password" name = "password">
+                                        
+                                    </td>
+                                    </tr>
+                                </tr>
+                                <td>
+                                    <input type="submit" name = "submit" value = "Submit">
+                                </td>
+                            </table>
+                        </form>
+
+                        <?php
+                        echo "<h2>Your given values are as:</h2>";
+                        echo $username;
+                        echo "<br>";
+
+                        echo $password;
+                        echo "<br>";
+                         ?>
 
                 </div>
                 <!-- /.container-fluid -->
